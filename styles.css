@@ -1,3 +1,9 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 header{
   font-size: 16px;
   color: orange;
@@ -16,4 +22,22 @@ footer{
 
 a{
   text-decoration: none;
+}
+
+h1{
+  font-family: 'Bebas Neue', cursive;
+}
+
+h2{
+  font-family: 'Bebas Neue', cursive;
+}
+
+p{
+  font-family: 'Roboto', sans-serif;
+}
+
+body{
+  background-image: url("background.jpg") ;
+  background-size: cover;
+  background-position: center;
 }
