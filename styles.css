@@ -8,12 +8,26 @@ header{
   font-size: 16px;
   color: orange;
   background-color: chartreuse;
+  margin: 10px;
+  padding: 50px;
+}
+
+nav{
+  margin: 10px;
+  padding: 50px;
+}
+
+main{
+  margin: 10px;
+  padding: 50px;
 }
 
 footer{
   font-size: 16px;
   color: orange;
   background-color: chartreuse;
+  margin: 10px;
+  padding: 50px;
 }
 
 .nav-list {
@@ -22,6 +36,7 @@ footer{
 
 a{
   text-decoration: none;
+  color: white; 
 }
 
 h1{
@@ -40,4 +55,20 @@ body{
   background-image: url("background.jpg") ;
   background-size: cover;
   background-position: center;
+  margin: 10px;
+  padding: 50px;
+} 
+.nav-list { 
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+  align-items: center; 
+} 
+
+.item { 
+  flex: 1 1 200px; 
+  margin: 10px; 
+  background-color: #2196F3; 
+  padding: 20px; 
 }
