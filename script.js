@@ -74,21 +74,36 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 // }
 // console.log(countdesc + " productos con descuento. / " + countnodesc + " productos sin descuento.");
 
-function calcularEdad(nombre, edad){
-  if (isNaN(edad)) {
+// function calcularEdad(nombre, edad){
+//   if (isNaN(edad)) {
+//     alert("El valor ingresado no es un número válido.");
+//     edad = prompt("Ingrese su edad:");
+//   }
+
+//   if (edad >= 18) {
+//     validacion = "Eres mayor de edad.";
+//   } else {
+//     validacion = "Eres menor de edad y te faltan " + (18 - edad) + " años para la mayoria de edad.";
+//   } 
+
+//   console.log("Hola " + nombre + ", tienes " + edad + " años. " + validacion);
+// }
+
+// nombre = prompt("Ingrese su nombre:");
+// edad = prompt("Ingrese su edad:");
+// calcularEdad(nombre, edad);
+
+function calcularprecioIVA (precio, iva = 21){
+  if (isNaN(precio) || isNaN(iva)) {
     alert("El valor ingresado no es un número válido.");
-    edad = prompt("Ingrese su edad:");
+    precio = prompt("Ingrese el precio:");
+    iva = prompt("Ingrese el IVA (por defecto 21):");
   }
-
-  if (edad >= 18) {
-    validacion = "Eres mayor de edad.";
-  } else {
-    validacion = "Eres menor de edad y te faltan " + (18 - edad) + " años para la mayoria de edad.";
-  } 
-
-  console.log("Hola " + nombre + ", tienes " + edad + " años. " + validacion);
+  let precioFinal = precio + (precio * iva / 100);
+  return precioFinal;
 }
 
-nombre = prompt("Ingrese su nombre:");
-edad = prompt("Ingrese su edad:");
-calcularEdad(nombre, edad);
+let precio = prompt("Ingrese el precio del producto:");
+let iva = prompt("Ingrese el IVA (por defecto 21):");
+let precioConIVA = calcularprecioIVA(parseFloat(precio), iva ? parseFloat(iva) : undefined);
+console.log("El precio final con IVA es: " + precioConIVA);
