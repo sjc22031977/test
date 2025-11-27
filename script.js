@@ -61,11 +61,14 @@ let productos = [
 ]; 
 let countdesc = 0;
 let countnodesc = 0;
+let total = 0;
 for (let i = 0; i < productos.length; i++) { 
   if (productos[i].descuento) { 
     countdesc++;
     console.log(productos[i].nombre + " tiene descuento.");
   }else {
+    total+=productos[i].precio;
+    console.log(total +  " es el total sin descuento hasta ahora.");
     countnodesc++;
   }
 }
