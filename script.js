@@ -54,22 +54,41 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 // console.log("Acceso denegado."); 
 // }
 
-let productos = [ 
-{ nombre: 'Laptop', descuento: true, precio: 1000 }, 
-{ nombre: 'Celular', descuento: false, precio: 500 }, 
-{ nombre: 'Tablet', descuento: true, precio: 300 } 
-]; 
-let countdesc = 0;
-let countnodesc = 0;
-let total = 0;
-for (let i = 0; i < productos.length; i++) { 
-  if (productos[i].descuento) { 
-    countdesc++;
-    console.log(productos[i].nombre + " tiene descuento.");
-  }else {
-    total+=productos[i].precio;
-    console.log(total +  " es el total sin descuento hasta ahora.");
-    countnodesc++;
+// let productos = [ 
+// { nombre: 'Laptop', descuento: true, precio: 1000 }, 
+// { nombre: 'Celular', descuento: false, precio: 500 }, 
+// { nombre: 'Tablet', descuento: true, precio: 300 } 
+// ]; 
+// let countdesc = 0;
+// let countnodesc = 0;
+// let total = 0;
+// for (let i = 0; i < productos.length; i++) { 
+//   if (productos[i].descuento) { 
+//     countdesc++;
+//     console.log(productos[i].nombre + " tiene descuento.");
+//   }else {
+//     total+=productos[i].precio;
+//     console.log(total +  " es el total sin descuento hasta ahora.");
+//     countnodesc++;
+//   }
+// }
+// console.log(countdesc + " productos con descuento. / " + countnodesc + " productos sin descuento.");
+
+function calcularEdad(nombre, edad){
+  if (isNaN(edad)) {
+    alert("El valor ingresado no es un número válido.");
+    edad = prompt("Ingrese su edad:");
   }
+
+  if (edad >= 18) {
+    validacion = "Eres mayor de edad.";
+  } else {
+    validacion = "Eres menor de edad y te faltan " + (18 - edad) + " años para la mayoria de edad.";
+  } 
+
+  console.log("Hola " + nombre + ", tienes " + edad + " años. " + validacion);
 }
-console.log(countdesc + " productos con descuento. / " + countnodesc + " productos sin descuento.");
+
+nombre = prompt("Ingrese su nombre:");
+edad = prompt("Ingrese su edad:");
+calcularEdad(nombre, edad);
