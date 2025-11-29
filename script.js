@@ -93,17 +93,29 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 // edad = prompt("Ingrese su edad:");
 // calcularEdad(nombre, edad);
 
-function calcularprecioIVA (precio, iva = 21){
-  if (isNaN(precio) || isNaN(iva)) {
-    alert("El valor ingresado no es un número válido.");
-    precio = prompt("Ingrese el precio:");
-    iva = prompt("Ingrese el IVA (por defecto 21):");
-  }
-  let precioFinal = precio + (precio * iva / 100);
-  return precioFinal;
-}
+// function calcularprecioIVA (precio, iva = 21){
+//   if (isNaN(precio) || isNaN(iva)) {
+//     alert("El valor ingresado no es un número válido.");
+//     precio = prompt("Ingrese el precio:");
+//     iva = prompt("Ingrese el IVA (por defecto 21):");
+//   }
+//   let precioFinal = precio + (precio * iva / 100);
+//   return precioFinal;
+// }
 
-let precio = prompt("Ingrese el precio del producto:");
-let iva = prompt("Ingrese el IVA (por defecto 21):");
-let precioConIVA = calcularprecioIVA(parseFloat(precio), iva ? parseFloat(iva) : undefined);
-console.log("El precio final con IVA es: " + precioConIVA);
+// let precio = prompt("Ingrese el precio del producto:");
+// let iva = prompt("Ingrese el IVA (por defecto 21):");
+// let precioConIVA = calcularprecioIVA(parseFloat(precio), iva ? parseFloat(iva) : undefined);
+// console.log("El precio final con IVA es: " + precioConIVA);
+
+// let boton = document.getElementById("miBoton"); 
+// boton.addEventListener("click", function() { 
+//   document.getElementById("parrafo").innerText = "El texto ha sido modificado con JavaScript";
+// }); 
+
+let boton = document.getElementById("miBoton"); 
+boton.addEventListener("click", function() { 
+  let nuevoElemento = document.createElement("li"); 
+  nuevoElemento.textContent = "Elemento 4"; 
+  document.getElementById("lista").appendChild(nuevoElemento); 
+}); 
