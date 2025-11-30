@@ -120,30 +120,58 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 //   document.getElementById("lista").appendChild(nuevoElemento); 
 // }); 
 
-document.getElementById("boton-agregar").addEventListener("click", 
-function () { 
-  let producto = { id: 1, nombre: "Producto 1", precio: 10 }; 
-  let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
-  carrito.push(producto); 
-  localStorage.setItem("carrito", JSON.stringify(carrito)); 
-  actualizarCarrito(); 
-}); 
+// document.getElementById("boton-agregar").addEventListener("click", 
+// function () { 
+//   let producto = { id: 1, nombre: "Producto 1", precio: 10 }; 
+//   let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
+//   carrito.push(producto); 
+//   localStorage.setItem("carrito", JSON.stringify(carrito)); 
+//   actualizarCarrito(); 
+// }); 
 
-function actualizarCarrito() { 
-  var carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
-  var listaCarrito = document.getElementById('lista-carrito'); 
-  listaCarrito.innerHTML = ''; 
-  for (var i = 0; i < carrito.length; i++) { 
-    var producto = carrito[i]; 
-    var li = document.createElement('li'); 
-    li.textContent = producto.nombre + ' - $' + producto.precio; 
-    listaCarrito.appendChild(li);
-  }
-};
+// function actualizarCarrito() { 
+//   var carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
+//   var listaCarrito = document.getElementById('lista-carrito'); 
+//   listaCarrito.innerHTML = ''; 
+//   for (var i = 0; i < carrito.length; i++) { 
+//     var producto = carrito[i]; 
+//     var li = document.createElement('li'); 
+//     li.textContent = producto.nombre + ' - $' + producto.precio; 
+//     listaCarrito.appendChild(li);
+//   }
+// };
 
-document.getElementById("boton-quitar").addEventListener("click", 
-function () { 
-  localStorage.removeItem('carrito'); 
-  actualizarCarrito(); 
-}); 
+// document.getElementById("boton-quitar").addEventListener("click", 
+// function () { 
+//   localStorage.removeItem('carrito'); 
+//   actualizarCarrito(); 
+// }); 
 
+// Función para aplicar las preferencias guardadas
+    function aplicarPreferencias() {
+      const nombre = localStorage.getItem("nombreUsuario");
+      const color = localStorage.getItem("colorFondo");
+      console.log("Cargando preferencias:", nombre, color);
+
+      if (nombre && color) {
+        document.getElementById("saludo").textContent = `Bienvenido, ${nombre}!`;
+        document.body.style.backgroundColor = color;
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("color").value = color;
+      }
+    }
+
+    // Guardar preferencias al enviar el formulario
+    document.getElementById("preferenciasForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Evita recargar la página
+      const nombre = document.getElementById("nombre").value;
+      const color = document.getElementById("color").value;
+
+      localStorage.setItem("nombreUsuario", nombre);
+      localStorage.setItem("colorFondo", color);
+
+      aplicarPreferencias();
+    });
+
+    // Aplicar preferencias automáticamente al cargar la página
+    window.addEventListener("DOMContentLoaded", aplicarPreferencias);
