@@ -113,9 +113,37 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 //   document.getElementById("parrafo").innerText = "El texto ha sido modificado con JavaScript";
 // }); 
 
-let boton = document.getElementById("miBoton"); 
-boton.addEventListener("click", function() { 
-  let nuevoElemento = document.createElement("li"); 
-  nuevoElemento.textContent = "Elemento 4"; 
-  document.getElementById("lista").appendChild(nuevoElemento); 
+// let boton = document.getElementById("miBoton"); 
+// boton.addEventListener("click", function() { 
+//   let nuevoElemento = document.createElement("li"); 
+//   nuevoElemento.textContent = "Elemento 4"; 
+//   document.getElementById("lista").appendChild(nuevoElemento); 
+// }); 
+
+document.getElementById("boton-agregar").addEventListener("click", 
+function () { 
+  let producto = { id: 1, nombre: "Producto 1", precio: 10 }; 
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || []; 
+  carrito.push(producto); 
+  localStorage.setItem("carrito", JSON.stringify(carrito)); 
+  actualizarCarrito(); 
 }); 
+
+function actualizarCarrito() { 
+  var carrito = JSON.parse(localStorage.getItem('carrito')) || []; 
+  var listaCarrito = document.getElementById('lista-carrito'); 
+  listaCarrito.innerHTML = ''; 
+  for (var i = 0; i < carrito.length; i++) { 
+    var producto = carrito[i]; 
+    var li = document.createElement('li'); 
+    li.textContent = producto.nombre + ' - $' + producto.precio; 
+    listaCarrito.appendChild(li);
+  }
+};
+
+document.getElementById("boton-quitar").addEventListener("click", 
+function () { 
+  localStorage.removeItem('carrito'); 
+  actualizarCarrito(); 
+}); 
+

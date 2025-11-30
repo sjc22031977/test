@@ -81,7 +81,7 @@ body{
   padding: 10px;
 }
 
-.card {`
+.card {
   background-color: rgba(255, 255, 255, 0.8); 
   border: 1px solid #ccc; 
   border-radius: 8px; 
@@ -101,7 +101,8 @@ body{
   }
 }
 
-media only screen and (min-width: 1200px) { 
+@media only screen and (min-width: 1200px) { 
   .grid-container { 
     grid-template-columns: 1fr 1fr 1fr;
-} 
+  } 
+}
