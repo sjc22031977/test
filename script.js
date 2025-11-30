@@ -147,31 +147,107 @@ alert("El resultado de la suma es: " + resultado + " (" + respuesta + ")");
 //   actualizarCarrito(); 
 // }); 
 
-// Función para aplicar las preferencias guardadas
-    function aplicarPreferencias() {
-      const nombre = localStorage.getItem("nombreUsuario");
-      const color = localStorage.getItem("colorFondo");
-      console.log("Cargando preferencias:", nombre, color);
+// // Función para aplicar las preferencias guardadas
+//     function aplicarPreferencias() {
+//       const nombre = localStorage.getItem("nombreUsuario");
+//       const color = localStorage.getItem("colorFondo");
+//       console.log("Cargando preferencias:", nombre, color);
 
-      if (nombre && color) {
-        document.getElementById("saludo").textContent = `Bienvenido, ${nombre}!`;
-        document.body.style.backgroundColor = color;
-        document.getElementById("nombre").value = nombre;
-        document.getElementById("color").value = color;
-      }
-    }
+//       if (nombre && color) {
+//         document.getElementById("saludo").textContent = `Bienvenido, ${nombre}!`;
+//         document.body.style.backgroundColor = color;
+//         document.getElementById("nombre").value = nombre;
+//         document.getElementById("color").value = color;
+//       }
+//     }
 
-    // Guardar preferencias al enviar el formulario
-    document.getElementById("preferenciasForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // Evita recargar la página
-      const nombre = document.getElementById("nombre").value;
-      const color = document.getElementById("color").value;
+//     // Guardar preferencias al enviar el formulario
+//     document.getElementById("preferenciasForm").addEventListener("submit", function(e) {
+//       e.preventDefault(); // Evita recargar la página
+//       const nombre = document.getElementById("nombre").value;
+//       const color = document.getElementById("color").value;
 
-      localStorage.setItem("nombreUsuario", nombre);
-      localStorage.setItem("colorFondo", color);
+//       localStorage.setItem("nombreUsuario", nombre);
+//       localStorage.setItem("colorFondo", color);
 
-      aplicarPreferencias();
+//       aplicarPreferencias();
+//     });
+
+//     // Aplicar preferencias automáticamente al cargar la página
+//     window.addEventListener("DOMContentLoaded", aplicarPreferencias);
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("https://fakestoreapi.com/products")
+    .then((response) => response.json())
+    .then((data) => {
+      const contenedor = document.getElementById("productos-container");
+      data.forEach((producto) => {
+        contenedor.innerHTML += `
+          <div class="card">
+            <img src="${producto.image}" alt="${producto.title}">
+            <h3>${producto.title}</h3>
+            <p>Precio: $${producto.price}</p>
+            <button onclick="agregarAlCarrito(${producto.id})">Añadir al carrito</button>
+          </div>
+        `;
+      });
+      actualizarCarrito();
+    })
+    .catch((error) => {
+      console.error("Error al obtener productos:", error);
+      contenedor.innerHTML = "<p>Hubo un problema al cargar los productos.</p>";
     });
+});
 
-    // Aplicar preferencias automáticamente al cargar la página
-    window.addEventListener("DOMContentLoaded", aplicarPreferencias);
+function agregarAlCarrito(idProducto) {
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  carrito.push(idProducto);
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  alert("Producto añadido al carrito");
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const carritoCounter = document.getElementById("cart-counter");
+  carritoCounter.textContent = carrito.length;
+}
+
+// Mostrar carrito
+function mostrarCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const carritoList = document.getElementById("carrito-list");
+  carritoList.innerHTML = "";
+
+  if (carrito.length === 0) {
+    carritoList.innerHTML = "<li>El carrito está vacío</li>";
+    return;
+  }
+
+  carrito.forEach((idProducto) => {
+    const li = document.createElement("li");
+    li.textContent = `Producto ID: ${idProducto}`;
+    carritoList.appendChild(li);
+  });
+}
+
+// Vaciar carrito
+function vaciarCarrito() {
+  localStorage.removeItem("carrito");
+  actualizarCarrito();
+  mostrarCarrito();
+}
+
+// Eventos de botones
+document.getElementById("ver-carrito").addEventListener("click", () => {
+  document.getElementById("carrito-container").style.display = "block";
+  mostrarCarrito();
+});
+
+document.getElementById("cerrar-carrito").addEventListener("click", () => {
+  document.getElementById("carrito-container").style.display = "none";
+});
+
+document.getElementById("vaciar-carrito").addEventListener("click", () => {
+  vaciarCarrito();
+});
